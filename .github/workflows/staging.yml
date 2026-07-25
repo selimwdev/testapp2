@@ -9,13 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Build & Run Container
         run: |
           docker build -t app-test .
           docker run -d -p 80:80 --name app app-test
+          # استنى شوية عشان الـ Apache يقوم
           sleep 15
+
       - name: DAST Scan (ZAP)
-        run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:80 -r report.html || true
+        run: >
+          docker run -v "${PWD}:/zap/wrk":rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py 
+          -t http://localhost:80 
+          -r report.html || true
+
       - name: Upload Report
         uses: actions/upload-artifact@v4
         with:
