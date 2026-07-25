@@ -1,0 +1,13 @@
+name: CI for f-branch
+
+on:
+  push:
+    branches: [ 'f/*' ]
+
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run SAST Scan
+        run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep scan --config auto
