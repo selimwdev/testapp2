@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run SAST Scan (Semgrep)
-        run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep scan --config auto
+        run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep scan --config auto --error
