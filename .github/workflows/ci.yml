@@ -1,13 +1,17 @@
-name: CI for f-branch
+name: CI Pipeline
 
 on:
   push:
-    branches: [ 'f/*' ]
+    branches:
+      - 'f/**'
+  workflow_dispatch:
 
 jobs:
   sast:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Run SAST Scan
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run SAST Scan (Semgrep)
         run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep scan --config auto
