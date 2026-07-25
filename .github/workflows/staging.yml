@@ -17,10 +17,8 @@ jobs:
           sleep 15
 
       - name: DAST Scan (ZAP)
-        run: >
-          docker run -v "${PWD}:/zap/wrk":rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py 
-          -t http://localhost:80 
-          -r report.html || true
+        run: |
+          docker run --user root --network="host" -v "${PWD}:/zap/wrk":rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:80 -r report.html || true
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
