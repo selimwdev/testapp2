@@ -14,7 +14,6 @@ jobs:
         run: |
           docker build -t app-test .
           docker run -d -p 80:80 --name app app-test
-          # استنى شوية عشان الـ Apache يقوم
           sleep 15
 
       - name: DAST Scan (ZAP)
